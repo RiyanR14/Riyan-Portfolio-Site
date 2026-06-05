@@ -17,9 +17,11 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <canvas class="motion-field" id="motionField" aria-hidden="true"></canvas>
   <div class="site-bg"></div>
   <div class="page-shell">
-    <header class="hero" id="top">
+    <div class="portfolio-content">
+      <header class="hero" id="top">
       <nav class="topbar">
         <a class="brand" href="#top" aria-label="Riyan R portfolio home">RR</a>
         <div class="nav-links">
@@ -27,54 +29,93 @@
           <a href="#certifications">Certifications</a>
           <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
+          <button class="nav-ai-btn" id="navAiBtn" type="button" aria-label="Open AI Assistant">
+            <svg viewBox="0 0 24 24" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
+              <path fill="currentColor" d="M12 2a10 10 0 0110 10 10 10 0 01-10 10A10 10 0 012 12 10 10 0 0112 2zm0 2a8 8 0 100 16 8 8 0 000-16zm-1 3h2v6h-2V7zm0 8h2v2h-2v-2z"></path>
+            </svg>
+            AI Assistant
+          </button>
         </div>
       </nav>
 
       <div class="hero-grid">
         <section class="hero-copy">
           <p class="eyebrow">Riyan R</p>
-          <h1>Data science thinking, embedded systems execution, and certifications that show consistent growth.</h1>
+          <h1>Building data-driven systems with embedded thinking and a sharp engineering eye.</h1>
           <p class="hero-text">
             I am an Electronics and Communication Engineering student specializing in Data Science at SRM
-            University, Chennai. This portfolio brings together my academic foundation, applied projects,
-            and every certification listed in my resume.
+            University, Chennai. I enjoy turning ideas into practical systems across IoT, automation,
+            analytics, and applied software.
+          </p>
+          <p class="hero-subtext">
+            This portfolio brings together my projects, certifications, internships, and the technical
+            direction I am growing toward.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="https://www.linkedin.com/in/riyanr" target="_blank" rel="noreferrer">Open LinkedIn</a>
+            <a class="button primary linkedin-button" href="https://www.linkedin.com/in/riyanr/" rel="noreferrer">Open LinkedIn</a>
+            <a class="button tertiary" href="assets/Riyan-Resume.pdf" target="_blank" rel="noreferrer">View Resume</a>
             <a class="button secondary" href="#certifications">View Certifications</a>
           </div>
         </section>
 
-        <aside class="hero-card">
-          <p class="card-label">Quick Snapshot</p>
-          <ul class="snapshot-list">
-            <li><span>Location</span><strong>Chennai, Tamil Nadu</strong></li>
-            <li><span>Degree</span><strong>B.Tech ECE (Data Science)</strong></li>
-            <li><span>University</span><strong>SRM University</strong></li>
-            <li><span>Graduation</span><strong>Expected May 2026</strong></li>
-            <li><span>CGPA</span><strong>9.13 / 10</strong></li>
-          </ul>
+        <aside class="hero-side">
+          <div class="portrait-card">
+            <img src="assets/profile.jpg" alt="Portrait of Riyan R" class="portrait-image">
+            <div class="portrait-badge">
+              <span>Data Science</span>
+              <span>IoT</span>
+              <span>Machine Learning</span>
+            </div>
+          </div>
+          <div class="hero-card">
+            <p class="card-label">Quick Snapshot</p>
+            <ul class="snapshot-list">
+              <li><span>Location</span><strong>Chennai, Tamil Nadu</strong></li>
+              <li><span>Degree</span><strong>B.Tech ECE (Data Science)</strong></li>
+              <li><span>University</span><strong>SRM University</strong></li>
+              <li><span>Graduation</span><strong>Expected May 2026</strong></li>
+              <li><span>CGPA</span><strong>9.19 / 10</strong></li>
+            </ul>
+          </div>
         </aside>
       </div>
 
-      <div class="hero-strip">
-        <div>
+      <div class="hero-strip" id="heroHighlights">
+        <button class="highlight-card is-active" type="button" data-highlight="certifications">
           <span class="strip-number">21</span>
           <span class="strip-label">Certifications listed</span>
-        </div>
-        <div>
+        </button>
+        <button class="highlight-card" type="button" data-highlight="projects">
           <span class="strip-number">3</span>
           <span class="strip-label">Applied projects featured</span>
-        </div>
-        <div>
+        </button>
+        <button class="highlight-card" type="button" data-highlight="languages">
           <span class="strip-number">4</span>
           <span class="strip-label">Spoken languages</span>
-        </div>
+        </button>
       </div>
+
+      <div class="hero-detail" id="heroDetail" aria-live="polite"></div>
+
+      <section class="achievement-card reveal-on-scroll is-visible" id="featuredAchievement">
+        <div class="achievement-copy">
+          <p class="eyebrow">Featured Achievement</p>
+          <h2>Oracle Cloud Infrastructure 2025 Certified Data Science Professional</h2>
+          <p class="achievement-text">
+            A standout credential that reflects my growing depth in cloud-based data science, model workflows,
+            and production-oriented learning.
+          </p>
+          <a class="achievement-link" href="#certifications">See certificate in portfolio</a>
+        </div>
+        <div class="achievement-stat">
+          <span class="achievement-label">Valid through</span>
+          <strong>October 31, 2027</strong>
+        </div>
+      </section>
     </header>
 
     <main>
-      <section class="section" id="about">
+      <section class="section reveal-on-scroll" id="about">
         <div class="section-heading">
           <p class="eyebrow">About</p>
           <h2>Strong fundamentals with a practical build-first mindset</h2>
@@ -107,7 +148,7 @@
         </div>
       </section>
 
-      <section class="section" id="education">
+      <section class="section reveal-on-scroll" id="education">
         <div class="section-heading">
           <p class="eyebrow">Education</p>
           <h2>Academic foundation in electronics and data science</h2>
@@ -120,12 +161,12 @@
           </div>
           <div class="education-meta">
             <span>Expected graduation: May 2026</span>
-            <span>CGPA: 9.13 / 10</span>
+            <span>CGPA: 9.19 / 10</span>
           </div>
         </article>
       </section>
 
-      <section class="section" id="skills">
+      <section class="section reveal-on-scroll" id="skills">
         <div class="section-heading">
           <p class="eyebrow">Skills</p>
           <h2>Capabilities across software, hardware, and analysis</h2>
@@ -165,7 +206,7 @@
         </div>
       </section>
 
-      <section class="section" id="experience">
+      <section class="section reveal-on-scroll" id="experience">
         <div class="section-heading">
           <p class="eyebrow">Training</p>
           <h2>Hands-on exposure to web fundamentals</h2>
@@ -196,24 +237,137 @@
             </div>
           </div>
         </article>
+        <article class="panel experience-card">
+          <div class="experience-head">
+            <div>
+              <p class="timeline-date">Agnirva.com | Summer 2025</p>
+              <h3>Software Intern - Agnirva Software Internship Program</h3>
+            </div>
+          </div>
+          <div class="experience-grid">
+            <div>
+              <h4>Internship Highlights</h4>
+              <ul>
+                <li>Successfully completed the software internship program with distinction.</li>
+                <li>Demonstrated strong dedication, perseverance, and commitment to learning.</li>
+                <li>Strengthened problem-solving and technical confidence through hands-on exposure.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>What I Gained</h4>
+              <ul>
+                <li>Acquired practical knowledge and hands-on experience in software development.</li>
+                <li>Worked on modern software development concepts and workflows.</li>
+                <li>Gained exposure to real-world development practices.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
       </section>
 
-      <section class="section" id="certifications">
+      <section class="section reveal-on-scroll" id="certifications">
         <div class="section-heading">
           <p class="eyebrow">Certifications</p>
           <h2>Certificates, badges, and internship credentials you can open directly from the portfolio</h2>
           <p class="section-note">
-            Use the filters to focus on certifications by provider, then click any card to preview the actual file.
+            Every card below opens the online certificate view directly.
           </p>
         </div>
         <div class="cert-toolbar">
-          <div class="filter-group" id="providerFilters" aria-label="Filter certifications by provider"></div>
-          <p class="cert-count"><span id="certCount">0</span> certifications shown</p>
+          <p class="cert-count"><span id="certCount">19</span> certifications shown</p>
         </div>
-        <div class="cert-grid" id="certGrid"></div>
+        <div class="cert-sections" id="certGrid">
+          <section class="cert-section-block">
+            <div class="cert-section-head">
+              <p class="eyebrow">Internships</p>
+              <p class="cert-section-count">2 items</p>
+            </div>
+            <div class="cert-grid">
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/15vOacjukuNN_xg-TCXAubeLvTAqL_j0t/view?usp=drive_link" target="_blank" rel="noreferrer">
+                <div class="cert-thumb cert-thumb-pdf">
+                  <div class="pdf-sheet">
+                    <span class="pdf-pill">PDF</span>
+                    <p class="pdf-issuer">Agnirva.com</p>
+                    <h4>Agnirva Software Internship Program</h4>
+                  </div>
+                </div>
+                <div class="cert-body">
+                  <span class="cert-badge">Internship</span>
+                  <p class="cert-issuer">Agnirva.com</p>
+                  <h3>Agnirva Software Internship Program</h3>
+                  <div class="cert-card-footer">
+                    <p class="cert-meta">Open online certificate.</p>
+                    <span class="cert-open">Open Certificate</span>
+                  </div>
+                </div>
+              </a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1HpwTtTaJdLcFCqVKmHRxpkBnO8mpyTtQ/view?usp=drive_link" target="_blank" rel="noreferrer">
+                <div class="cert-thumb cert-thumb-image">
+                  <img src="assets/certificates/NSIC Certificate.jpg" alt="Web Designing Internship Training">
+                </div>
+                <div class="cert-body">
+                  <span class="cert-badge">Internship</span>
+                  <p class="cert-issuer">NSIC</p>
+                  <h3>Web Designing Internship Training</h3>
+                  <div class="cert-card-footer">
+                    <p class="cert-meta">Open online certificate.</p>
+                    <span class="cert-open">Open Certificate</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section class="cert-section-block">
+            <div class="cert-section-head">
+              <p class="eyebrow">Certifications</p>
+              <p class="cert-section-count">16 items</p>
+            </div>
+            <div class="cert-grid">
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1wUs6Q8dU1XOYcW31O6zxh-YhkmNqrW86/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">Accenture</p><h4>Data Analytics and Visualization Job Simulation</h4></div></div><div class="cert-body"><span class="cert-badge">Analytics</span><p class="cert-issuer">Accenture</p><h3>Data Analytics and Visualization Job Simulation</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1311abwR8NjP_PY1tGwNJuv0LK-b1U7AE/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">Coursera</p><h4>Business Analysis &amp; Process Management</h4></div></div><div class="cert-body"><span class="cert-badge">Management</span><p class="cert-issuer">Coursera</p><h3>Business Analysis &amp; Process Management</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1H11cA2DGCwKHWXmYe0TBZ54wRevN8DQw/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">IBM</p><h4>Data Analysis with Python</h4></div></div><div class="cert-body"><span class="cert-badge">Data Science</span><p class="cert-issuer">IBM</p><h3>Data Analysis with Python</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1yIuXIRIQXhFji6PcVo3qbiwAtwd9HQSN/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">IBM</p><h4>Data Science Methodology</h4></div></div><div class="cert-body"><span class="cert-badge">Data Science</span><p class="cert-issuer">IBM</p><h3>Data Science Methodology</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/14vUIFahjyH0XjDSS7G_1P1AjeafPkRlx/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">IBM</p><h4>Python for Data Science, AI &amp; Development</h4></div></div><div class="cert-body"><span class="cert-badge">Python</span><p class="cert-issuer">IBM</p><h3>Python for Data Science, AI &amp; Development</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1wt5tSWoSl16jjpBwHjgpE-T9PVoe93to/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">IBM</p><h4>What is Data Science?</h4></div></div><div class="cert-body"><span class="cert-badge">Data Science</span><p class="cert-issuer">IBM</p><h3>What is Data Science?</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1GcOJ2-7P_vPiCjMrkUx7AmGYR6lePBmi/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">IBM</p><h4>Databases and SQL for Data Science with Python</h4></div></div><div class="cert-body"><span class="cert-badge">Database</span><p class="cert-issuer">IBM</p><h3>Databases and SQL for Data Science with Python</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1zrDq3HbLt6HFPIU2YkflgGHkCwiq6kXS/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">Oracle</p><h4>Oracle Cloud Infrastructure 2025 Certified Data Science Professional</h4></div></div><div class="cert-body"><span class="cert-badge">Cloud</span><p class="cert-issuer">Oracle</p><h3>Oracle Cloud Infrastructure 2025 Certified Data Science Professional</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1D173_htWoPeNAkiDq5KVd4Ac9wgJFe2a/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">NPTEL</p><h4>Evolution of Air Interface towards 5G</h4></div></div><div class="cert-body"><span class="cert-badge">Telecommunications</span><p class="cert-issuer">NPTEL</p><h3>Evolution of Air Interface towards 5G</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1x5J88cFIVfQLdRwxTunPAOxiAgvMubQn/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">UiPath</p><h4>UiPath Automation Explorer for Students</h4></div></div><div class="cert-body"><span class="cert-badge">Automation</span><p class="cert-issuer">UiPath</p><h3>UiPath Automation Explorer for Students</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1VKQl6XFj4eUeHwwkw9UcZh-ymx98WKsO/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">IBM</p><h4>IBM Data Science Professional Certificate</h4></div></div><div class="cert-body"><span class="cert-badge">Professional Certificate</span><p class="cert-issuer">IBM</p><h3>IBM Data Science Professional Certificate</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/16_4Jf1F_Sid2zgjYgnM9L51E3NukZqoi/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">IBM</p><h4>Python Project for Data Science</h4></div></div><div class="cert-body"><span class="cert-badge">Project</span><p class="cert-issuer">IBM</p><h3>Python Project for Data Science</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1kVUwgYc4QsnOHJh1RoS7917TArQedVSN/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">IBM</p><h4>Tools for Data Science</h4></div></div><div class="cert-body"><span class="cert-badge">Tools</span><p class="cert-issuer">IBM</p><h3>Tools for Data Science</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1BIC6p3Rh1oGgO70Z34dMwLyQuvqDy1RQ/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-image"><img src="assets/certificates/Nptel 1.jpeg" alt="Database Management System"></div><div class="cert-body"><span class="cert-badge">Database</span><p class="cert-issuer">NPTEL</p><h3>Database Management System</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1IRDH3X6XROM6htgxC4L-QF812tge0EKD/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-image"><img src="assets/certificates/SMT.jpeg" alt="Surface Mount Technology (SMT): Components, Techniques, and Tips"></div><div class="cert-body"><span class="cert-badge">Electronics</span><p class="cert-issuer">Alison</p><h3>Surface Mount Technology (SMT): Components, Techniques, and Tips</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+            </div>
+          </section>
+
+          <section class="cert-section-block">
+            <div class="cert-section-head">
+              <p class="eyebrow">Badges</p>
+              <p class="cert-section-count">1 item</p>
+            </div>
+            <div class="cert-grid">
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1hzB-q-B3k-4edzFmo5PrspHhQafgpKyu/view?usp=drive_link" target="_blank" rel="noreferrer">
+                <div class="cert-thumb cert-thumb-image">
+                  <img src="assets/certificates/OCI badge.jpg" alt="Oracle OCI Data Science Professional Badge">
+                </div>
+                <div class="cert-body">
+                  <span class="cert-badge">Badge</span>
+                  <p class="cert-issuer">Oracle</p>
+                  <h3>Oracle OCI Data Science Professional Badge</h3>
+                  <div class="cert-card-footer">
+                    <p class="cert-meta">Open online certificate.</p>
+                    <span class="cert-open">Open Certificate</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </section>
+        </div>
       </section>
 
-      <section class="section" id="projects">
+      <section class="section reveal-on-scroll" id="projects">
         <div class="section-heading">
           <p class="eyebrow">Projects</p>
           <h2>Applied work across edge AI, prosthetics, and wireless systems</h2>
@@ -226,6 +380,12 @@
               Built an IoT and Edge AI system for real-time anomaly detection with live monitoring, alert
               management, CSV analysis, and multi-station visibility through a Flask web application.
             </p>
+            <div class="project-ribbon">
+              <a href="#skills" class="project-tag">Python</a>
+              <a href="#skills" class="project-tag">Flask</a>
+              <a href="#skills" class="project-tag">TensorFlow</a>
+              <a href="#skills" class="project-tag">Scikit-learn</a>
+            </div>
             <p class="project-tools">Tools: Python, Flask, TensorFlow, Scikit-learn, HTML, CSS, JavaScript</p>
           </article>
           <article class="project-card">
@@ -235,6 +395,11 @@
               Developed a prosthetic arm concept designed to provide tactile feedback using haptic
               mechanisms.
             </p>
+            <div class="project-ribbon">
+              <a href="#skills" class="project-tag">Arduino IDE</a>
+              <a href="#skills" class="project-tag">CAD</a>
+              <a href="#skills" class="project-tag">Haptics</a>
+            </div>
             <p class="project-tools">Tools: Arduino IDE, CAD</p>
           </article>
           <article class="project-card">
@@ -244,12 +409,17 @@
               Developed a GPS-based wireless communication system using ESP32 to transmit and receive data
               through a LoRa module.
             </p>
+            <div class="project-ribbon">
+              <a href="#skills" class="project-tag">ESP32</a>
+              <a href="#skills" class="project-tag">LoRa</a>
+              <a href="#skills" class="project-tag">Serial Communication</a>
+            </div>
             <p class="project-tools">Tools: Arduino IDE, Serial Communication, HTML</p>
           </article>
         </div>
       </section>
 
-      <section class="section" id="volunteering">
+      <section class="section reveal-on-scroll" id="volunteering">
         <div class="section-heading">
           <p class="eyebrow">Leadership & Service</p>
           <h2>Consistent participation beyond coursework</h2>
@@ -271,7 +441,7 @@
       </section>
     </main>
 
-    <footer class="footer section" id="contact">
+    <footer class="footer section reveal-on-scroll" id="contact">
       <div>
         <p class="eyebrow">Contact</p>
         <h2>Open to internships, projects, and technical collaboration</h2>
@@ -281,7 +451,7 @@
           <span>Email</span>
           <strong>riyan14102004@gmail.com</strong>
         </a>
-        <a class="contact-card" href="https://www.linkedin.com/in/riyanr" target="_blank" rel="noreferrer">
+        <a class="contact-card" href="https://www.linkedin.com/in/riyanr/" rel="noreferrer">
           <span>LinkedIn</span>
           <strong>linkedin.com/in/riyanr</strong>
         </a>
@@ -290,9 +460,50 @@
           <strong>+91 94456 46889</strong>
         </a>
       </div>
-      <p class="footer-note">Built from resume details and linked to the provided LinkedIn profile.</p>
     </footer>
-  </div>
+    </div> <!-- end portfolio-content -->
+
+    <aside class="chat-sidebar" id="chatSidebar">
+      <div class="chat-header">
+        <div class="chat-user-info">
+          <div class="chat-avatar">
+            <img src="assets/profile.jpg" alt="Riyan R Avatar" class="avatar-img">
+            <span class="status-dot"></span>
+          </div>
+          <div class="chat-title-group">
+            <h3>Riyan's AI Assistant</h3>
+            <span class="chat-status">Online &amp; Ready</span>
+          </div>
+        </div>
+        <button class="chat-close-mobile" id="chatCloseMobile" aria-label="Close Chat">&times;</button>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <!-- Messages will be injected dynamically -->
+      </div>
+
+      <div class="chat-input-area">
+        <div class="chat-suggestions" id="chatSuggestions">
+          <!-- Suggestion chips will be injected here -->
+        </div>
+        <form class="chat-form" id="chatForm">
+          <input type="text" id="chatInput" placeholder="Ask me about Riyan..." autocomplete="off" aria-label="Chat input">
+          <button type="submit" class="chat-send-btn" aria-label="Send message">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </aside>
+  </div> <!-- end page-shell -->
+
+  <button class="mobile-chat-trigger" id="mobileChatTrigger" aria-label="Chat with AI Assistant">
+    <svg viewBox="0 0 24 24" width="28" height="28">
+      <path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path>
+    </svg>
+    <span class="unread-badge">1</span>
+  </button>
 
   <div class="viewer-modal" id="viewerModal" aria-hidden="true" role="dialog" aria-labelledby="viewerTitle">
     <div class="viewer-backdrop" data-close-viewer="true"></div>
