@@ -18,7 +18,7 @@ Inspired by next-generation designs like [calebixca.com](https://calebixca.com/)
 - Features deep integration with the portfolio: clicking on cert/project links in the chat automatically scrolls the left panel to the target section.
 - Incorporates dynamic suggested prompt chips that update contextually based on the user's last query.
 
-### 3. God-Like Animations & Interactivity
+### 3. Animations & Interactivity
 - **Pointer Particle sparks**: Clicking triggers (buttons, navigation options, suggestion chips) generates a burst of glowing colored sparks that scatter and fade.
 - **3D Card Tilt Hover**: Hovering over card elements (projects, skills, certificates) applies an interactive 3D tilt perspective, lifting and rotating panels toward your cursor.
 - **Dodge-Mouse Particle Physics**: Background canvas particles detect pointer movements and gently move away from the cursor.
