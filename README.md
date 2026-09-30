@@ -1,4 +1,4 @@
-# Riyan R | Data Science & Embedded Systems Portfolio
+# Riyan R | Data Science Portfolio
 
 A premium, interactive split-screen portfolio website for Riyan R, showcasing B.Tech credentials, software and hardware engineering projects, technical skills, and professional certifications.
 
