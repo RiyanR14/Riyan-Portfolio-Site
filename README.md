@@ -2,7 +2,7 @@
 
 A premium, interactive split-screen portfolio website for Riyan R, showcasing B.Tech credentials, software and hardware engineering projects, technical skills, and professional certifications.
 
-Inspired by next-generation designs like [calebixca.com](https://calebixca.com/), this portfolio is designed to function as an interactive product rather than a static presentation.
+This portfolio is designed to function as an interactive product rather than a static presentation.
 
 ---
 
