@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Riyan R | Data Science & Embedded Portfolio</title>
+  <title>Riyan R — Engineer, Data Scientist & Builder</title>
   <meta
     name="description"
     content="Portfolio of Riyan R, showcasing certifications, engineering projects, technical skills, and academic work in data science, IoT, and embedded systems."
   >
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/5ac3fe7c6abd2f62067f266d89671492?family=HelveticaNowDisplay-Medium">
+  <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/1aa3377e489837a26d019bba501e779d?family=HelveticaNowDisplayW01-Rg">
   <link
     href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet"
@@ -19,6 +21,7 @@
 <body>
   <canvas class="motion-field" id="motionField" aria-hidden="true"></canvas>
   <div class="site-bg"></div>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgressBar"></span></div>
   <div class="page-shell">
     <div class="portfolio-content">
       <header class="hero" id="top">
@@ -29,38 +32,44 @@
           <a href="#certifications">Certifications</a>
           <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
-          <button class="nav-ai-btn" id="navAiBtn" type="button" aria-label="Open AI Assistant">
+          <button class="nav-ai-btn" id="navAiBtn" type="button" aria-label="Open AI Assistant" aria-expanded="false" aria-controls="chatSidebar">
             <svg viewBox="0 0 24 24" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
               <path fill="currentColor" d="M12 2a10 10 0 0110 10 10 10 0 01-10 10A10 10 0 012 12 10 10 0 0112 2zm0 2a8 8 0 100 16 8 8 0 000-16zm-1 3h2v6h-2V7zm0 8h2v2h-2v-2z"></path>
             </svg>
             AI Assistant
           </button>
         </div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+          <span class="theme-toggle-icon" aria-hidden="true">☼</span>
+          <span class="theme-toggle-label">Light mode</span>
+        </button>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+      <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" aria-hidden="true">
+        <a href="#about">About</a><a href="#certifications">Certifications</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
       </nav>
 
-      <div class="hero-grid">
+      <div class="hero-grid" id="heroScene">
         <section class="hero-copy">
-          <p class="eyebrow">Riyan R</p>
-          <h1>Building data-driven systems with embedded thinking and a sharp engineering eye.</h1>
-          <p class="hero-text">
-            I am an Electronics and Communication Engineering student specializing in Data Science at SRM
-            University, Chennai. I enjoy turning ideas into practical systems across IoT, automation,
-            analytics, and applied software.
-          </p>
-          <p class="hero-subtext">
-            This portfolio brings together my projects, certifications, internships, and the technical
-            direction I am growing toward.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary linkedin-button" href="https://www.linkedin.com/in/riyanr/" rel="noreferrer">Open LinkedIn</a>
-            <a class="button tertiary" href="assets/Riyan-Resume.pdf" target="_blank" rel="noreferrer">View Resume</a>
-            <a class="button secondary" href="#certifications">View Certifications</a>
+          <p class="hero-intro-blur">RIYAN R <span>·</span> B.Tech Graduate</p>
+          <h1 class="hero-typewriter" id="heroTypewriter" aria-label="I build where data meets the real world."></h1>
+          <p class="hero-summary">Electronics and Communication Engineering graduate at SRM, exploring data science, IoT, and embedded products.</p>
+          <div class="hero-actions hero-pills" id="heroPills">
+            <a class="hero-pill" href="#projects">Explore my work <span aria-hidden="true">↗</span></a>
+            <a class="hero-pill" href="assets/Riyan-Resume.pdf" target="_blank" rel="noreferrer">View résumé <span aria-hidden="true">↗</span></a>
+            <a class="hero-pill" href="#contact">Say hello <span aria-hidden="true">↗</span></a>
+            <button class="hero-pill hero-pill-outline" id="copyEmailButton" type="button" data-email="riyan14102004@gmail.com">
+              <span class="copy-email-label" aria-live="polite">Copy my email</span><span class="copy-email-icon" aria-hidden="true">⧉</span>
+            </button>
           </div>
         </section>
 
         <aside class="hero-side">
           <div class="portrait-card">
-            <img src="assets/profile.jpg" alt="Portrait of Riyan R" class="portrait-image">
+            <img src="assets/riyan-portrait.png" alt="Illustrated portrait of Riyan R wearing sunglasses and a black jacket" class="portrait-image">
+            <canvas class="portrait-canvas" id="portraitHeadCanvas" aria-hidden="true"></canvas>
             <div class="portrait-badge">
               <span>Data Science</span>
               <span>IoT</span>
@@ -72,13 +81,15 @@
             <ul class="snapshot-list">
               <li><span>Location</span><strong>Chennai, Tamil Nadu</strong></li>
               <li><span>Degree</span><strong>B.Tech ECE (Data Science)</strong></li>
-              <li><span>University</span><strong>SRM University</strong></li>
-              <li><span>Graduation</span><strong>Expected May 2026</strong></li>
-              <li><span>CGPA</span><strong>9.19 / 10</strong></li>
+              <li><span>University</span><strong>SRM Institute of Science and Technology</strong></li>
+              <li><span>Graduation</span><strong>September 2026</strong></li>
+              <li><span>CGPA</span><strong>9.18 / 10</strong></li>
             </ul>
           </div>
         </aside>
       </div>
+      <a class="hero-scroll" href="#about"><span>Scroll to explore</span><b aria-hidden="true">↓</b></a>
+      </header>
 
       <div class="hero-strip" id="heroHighlights">
         <button class="highlight-card is-active" type="button" data-highlight="certifications">
@@ -86,7 +97,7 @@
           <span class="strip-label">Certifications listed</span>
         </button>
         <button class="highlight-card" type="button" data-highlight="projects">
-          <span class="strip-number">3</span>
+          <span class="strip-number">5</span>
           <span class="strip-label">Applied projects featured</span>
         </button>
         <button class="highlight-card" type="button" data-highlight="languages">
@@ -112,8 +123,6 @@
           <strong>October 31, 2027</strong>
         </div>
       </section>
-    </header>
-
     <main>
       <section class="section reveal-on-scroll" id="about">
         <div class="section-heading">
@@ -155,13 +164,13 @@
         </div>
         <article class="panel education-card">
           <div>
-            <p class="timeline-date">2022 - Present</p>
+            <p class="timeline-date">2022 - 2026</p>
             <h3>Bachelor of Technology, Electronics and Communication Engineering (Data Science)</h3>
-            <p>SRM University, Chennai</p>
+            <p>SRM Institute of Science and Technology, Chennai</p>
           </div>
           <div class="education-meta">
-            <span>Expected graduation: May 2026</span>
-            <span>CGPA: 9.19 / 10</span>
+            <span>Graduated: September 2026</span>
+            <span>CGPA: 9.18 / 10</span>
           </div>
         </article>
       </section>
@@ -274,8 +283,22 @@
           </p>
         </div>
         <div class="cert-toolbar">
-          <p class="cert-count"><span id="certCount">19</span> certifications shown</p>
+          <div class="cert-filter-controls">
+            <label class="cert-search-wrap">
+              <span class="sr-only">Search certificates</span>
+              <input id="certSearch" type="search" placeholder="Search certificates…" autocomplete="off">
+              <span aria-hidden="true">⌕</span>
+            </label>
+            <label class="cert-category-wrap">
+              <span class="sr-only">Filter by category</span>
+              <select id="certCategoryFilter">
+                <option value="all">All categories</option>
+              </select>
+            </label>
+          </div>
+          <p class="cert-count" aria-live="polite" aria-atomic="true"><span id="certCount">19</span> certificates shown</p>
         </div>
+        <p class="cert-empty-state" id="certEmptyState" role="status" hidden>No certificates match that search. Try another title or category.</p>
         <div class="cert-sections" id="certGrid">
           <section class="cert-section-block">
             <div class="cert-section-head">
@@ -302,8 +325,12 @@
                 </div>
               </a>
               <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1HpwTtTaJdLcFCqVKmHRxpkBnO8mpyTtQ/view?usp=drive_link" target="_blank" rel="noreferrer">
-                <div class="cert-thumb cert-thumb-image">
-                  <img src="assets/certificates/NSIC Certificate.jpg" alt="Web Designing Internship Training">
+                <div class="cert-thumb cert-thumb-pdf">
+                  <div class="pdf-sheet">
+                    <span class="pdf-pill">PDF</span>
+                    <p class="pdf-issuer">NSIC</p>
+                    <h4>Web Designing Internship Training</h4>
+                  </div>
                 </div>
                 <div class="cert-body">
                   <span class="cert-badge">Internship</span>
@@ -337,8 +364,8 @@
               <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1VKQl6XFj4eUeHwwkw9UcZh-ymx98WKsO/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">IBM</p><h4>IBM Data Science Professional Certificate</h4></div></div><div class="cert-body"><span class="cert-badge">Professional Certificate</span><p class="cert-issuer">IBM</p><h3>IBM Data Science Professional Certificate</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
               <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/16_4Jf1F_Sid2zgjYgnM9L51E3NukZqoi/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">IBM</p><h4>Python Project for Data Science</h4></div></div><div class="cert-body"><span class="cert-badge">Project</span><p class="cert-issuer">IBM</p><h3>Python Project for Data Science</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
               <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1kVUwgYc4QsnOHJh1RoS7917TArQedVSN/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">IBM</p><h4>Tools for Data Science</h4></div></div><div class="cert-body"><span class="cert-badge">Tools</span><p class="cert-issuer">IBM</p><h3>Tools for Data Science</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
-              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1BIC6p3Rh1oGgO70Z34dMwLyQuvqDy1RQ/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-image"><img src="assets/certificates/Nptel 1.jpeg" alt="Database Management System"></div><div class="cert-body"><span class="cert-badge">Database</span><p class="cert-issuer">NPTEL</p><h3>Database Management System</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
-              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1IRDH3X6XROM6htgxC4L-QF812tge0EKD/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-image"><img src="assets/certificates/SMT.jpeg" alt="Surface Mount Technology (SMT): Components, Techniques, and Tips"></div><div class="cert-body"><span class="cert-badge">Electronics</span><p class="cert-issuer">Alison</p><h3>Surface Mount Technology (SMT): Components, Techniques, and Tips</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1BIC6p3Rh1oGgO70Z34dMwLyQuvqDy1RQ/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">NPTEL</p><h4>Database Management System</h4></div></div><div class="cert-body"><span class="cert-badge">Database</span><p class="cert-issuer">NPTEL</p><h3>Database Management System</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
+              <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1IRDH3X6XROM6htgxC4L-QF812tge0EKD/view?usp=drive_link" target="_blank" rel="noreferrer"><div class="cert-thumb cert-thumb-pdf"><div class="pdf-sheet"><span class="pdf-pill">PDF</span><p class="pdf-issuer">Alison</p><h4>Surface Mount Technology (SMT): Components, Techniques, and Tips</h4></div></div><div class="cert-body"><span class="cert-badge">Electronics</span><p class="cert-issuer">Alison</p><h3>Surface Mount Technology (SMT): Components, Techniques, and Tips</h3><div class="cert-card-footer"><p class="cert-meta">Open online certificate.</p><span class="cert-open">Open Certificate</span></div></div></a>
             </div>
           </section>
 
@@ -349,8 +376,12 @@
             </div>
             <div class="cert-grid">
               <a class="cert-card cert-link-card" href="https://drive.google.com/file/d/1hzB-q-B3k-4edzFmo5PrspHhQafgpKyu/view?usp=drive_link" target="_blank" rel="noreferrer">
-                <div class="cert-thumb cert-thumb-image">
-                  <img src="assets/certificates/OCI badge.jpg" alt="Oracle OCI Data Science Professional Badge">
+                <div class="cert-thumb cert-thumb-pdf">
+                  <div class="pdf-sheet">
+                    <span class="pdf-pill">PDF</span>
+                    <p class="pdf-issuer">Oracle</p>
+                    <h4>Oracle OCI Data Science Professional Badge</h4>
+                  </div>
                 </div>
                 <div class="cert-body">
                   <span class="cert-badge">Badge</span>
@@ -370,11 +401,14 @@
       <section class="section reveal-on-scroll" id="projects">
         <div class="section-heading">
           <p class="eyebrow">Projects</p>
-          <h2>Applied work across edge AI, prosthetics, and wireless systems</h2>
+          <h2>Applied work across machine learning, edge AI, and embedded systems</h2>
         </div>
         <div class="project-grid">
           <article class="project-card featured">
-            <p class="project-year">2026</p>
+            <div class="project-top-row">
+              <span class="project-category-tag">Featured</span>
+              <p class="project-year">2026</p>
+            </div>
             <h3>Anomaly Detection in IoT Enabled EV Charging Stations</h3>
             <p>
               Built an IoT and Edge AI system for real-time anomaly detection with live monitoring, alert
@@ -385,11 +419,69 @@
               <a href="#skills" class="project-tag">Flask</a>
               <a href="#skills" class="project-tag">TensorFlow</a>
               <a href="#skills" class="project-tag">Scikit-learn</a>
+              <a href="#skills" class="project-tag">IoT &amp; Edge AI</a>
             </div>
             <p class="project-tools">Tools: Python, Flask, TensorFlow, Scikit-learn, HTML, CSS, JavaScript</p>
+            <div class="project-actions">
+              <a class="project-gh-btn" href="https://github.com/RiyanR14/EV-Charging-Anomaly-Detection" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                <span>View on GitHub</span>
+              </a>
+            </div>
           </article>
+
           <article class="project-card">
-            <p class="project-year">2025</p>
+            <div class="project-top-row">
+              <span class="project-category-tag">Data Science / EDA</span>
+              <p class="project-year">2025</p>
+            </div>
+            <h3>Air Quality EDA</h3>
+            <p>Exploratory data analysis and visualizations on an air quality dataset.</p>
+            <div class="project-ribbon" aria-label="Project topics">
+              <span class="project-tag">Air Quality</span>
+              <span class="project-tag">Data Analysis</span>
+              <span class="project-tag">Visualization</span>
+            </div>
+            <p class="project-tools">Tools: Pandas, NumPy, Matplotlib, Seaborn</p>
+            <div class="project-actions">
+              <a class="project-gh-btn" href="https://github.com/RiyanR14/Air-Quality-EDA" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                <span>View on GitHub</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card featured-ongoing">
+            <div class="project-top-row">
+              <span class="project-status-pill"><span class="pulse-dot"></span>Ongoing</span>
+              <p class="project-year">2026</p>
+            </div>
+            <h3>Deep Learning Algorithms from Scratch</h3>
+            <p class="project-subtitle">Image Categorization Engine without TensorFlow</p>
+            <p>
+              Designing and coding deep learning neural network architectures completely from first principles in pure Python and NumPy.
+              Implements mathematical forward propagation, backpropagation gradient calculations, cost function optimizations,
+              and activation matrices for image categorization without relying on external high-level ML frameworks.
+            </p>
+            <div class="project-ribbon">
+              <a href="#skills" class="project-tag">Python</a>
+              <a href="#skills" class="project-tag">NumPy</a>
+              <a href="#skills" class="project-tag">Deep Learning</a>
+              <a href="#skills" class="project-tag">Computer Vision</a>
+              <a href="#skills" class="project-tag">From Scratch</a>
+            </div>
+            <p class="project-tools">Tools: Python, NumPy, Vectorized Calculus, Matrix Math</p>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top-row">
+              <span class="project-category-tag">Hardware / IoT</span>
+              <p class="project-year">2025</p>
+            </div>
             <h3>Smart Prosthetic Arm with Haptic Feedback</h3>
             <p>
               Developed a prosthetic arm concept designed to provide tactile feedback using haptic
@@ -402,8 +494,12 @@
             </div>
             <p class="project-tools">Tools: Arduino IDE, CAD</p>
           </article>
+
           <article class="project-card">
-            <p class="project-year">2024</p>
+            <div class="project-top-row">
+              <span class="project-category-tag">Embedded</span>
+              <p class="project-year">2024</p>
+            </div>
             <h3>GPS Tracker using GSM and LoRa Module</h3>
             <p>
               Developed a GPS-based wireless communication system using ESP32 to transmit and receive data
@@ -426,11 +522,11 @@
         </div>
         <div class="timeline">
           <article class="timeline-item">
-            <span class="timeline-date">2022 - Present</span>
+            <span class="timeline-date">2022 - 2026</span>
             <h3>Working Committee, IEI Club</h3>
           </article>
           <article class="timeline-item">
-            <span class="timeline-date">2022 - Present</span>
+            <span class="timeline-date">2022 - 2026</span>
             <h3>Coordinator, Robotics Club</h3>
           </article>
           <article class="timeline-item">
@@ -463,7 +559,12 @@
     </footer>
     </div> <!-- end portfolio-content -->
 
-    <aside class="chat-sidebar" id="chatSidebar">
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" aria-hidden="true" tabindex="-1">
+      <span aria-hidden="true">↑</span><span class="back-to-top-label">Back to top</span>
+    </button>
+
+    <button class="chat-backdrop" id="chatBackdrop" type="button" aria-label="Close AI Assistant" tabindex="-1"></button>
+    <aside class="chat-sidebar" id="chatSidebar" role="dialog" aria-modal="true" aria-labelledby="chatTitle" aria-hidden="true" inert>
       <div class="chat-header">
         <div class="chat-user-info">
           <div class="chat-avatar">
@@ -471,7 +572,7 @@
             <span class="status-dot"></span>
           </div>
           <div class="chat-title-group">
-            <h3>Riyan's AI Assistant</h3>
+          <h3 id="chatTitle">Riyan's AI Assistant</h3>
             <span class="chat-status">Online &amp; Ready</span>
           </div>
         </div>
@@ -489,8 +590,11 @@
         <form class="chat-form" id="chatForm">
           <input type="text" id="chatInput" placeholder="Ask me about Riyan..." autocomplete="off" aria-label="Chat input">
           <button type="submit" class="chat-send-btn" aria-label="Send message">
-            <svg viewBox="0 0 24 24" width="20" height="20">
+            <svg class="chat-send-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
               <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+            </svg>
+            <svg class="chat-sent-check" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path d="m5 12.5 4.2 4.2L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </button>
         </form>
@@ -498,9 +602,10 @@
     </aside>
   </div> <!-- end page-shell -->
 
-  <button class="mobile-chat-trigger" id="mobileChatTrigger" aria-label="Chat with AI Assistant">
+  <button class="mobile-chat-trigger" id="mobileChatTrigger" type="button" aria-label="Chat with AI Assistant" aria-expanded="false" aria-controls="chatSidebar">
     <svg viewBox="0 0 24 24" width="28" height="28">
-      <path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path>
+      <path class="launcher-chat-glyph" fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path>
+      <path class="launcher-send-glyph" fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
     </svg>
     <span class="unread-badge">1</span>
   </button>
