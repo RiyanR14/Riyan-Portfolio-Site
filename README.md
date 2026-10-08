@@ -14,7 +14,7 @@ This portfolio is designed to function as an interactive product rather than a s
 
 ### 2. Client-Side AI Assistant Chatbot
 - Powered by a local natural language keyword-matching engine in `script.js` (no API key or backend required).
-- Knows detailed information about Riyan's education (SRM B.Tech ECE, CGPA 9.19), programming skills, volunteering, and contact details.
+- Knows detailed information about Riyan's education (SRM B.Tech ECE-DS, CGPA 9.18), programming skills, volunteering, and contact details.
 - Features deep integration with the portfolio: clicking on cert/project links in the chat automatically scrolls the left panel to the target section.
 - Incorporates dynamic suggested prompt chips that update contextually based on the user's last query.
 
